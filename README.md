@@ -40,4 +40,6 @@ cd projectArturia
 ```
 
 ### Passo 3: Adicionar extensao live server, para subir a aplicacao
-- **Live Server** para rodar a aplicação localmente. [baixar](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
+```
+Live Server para rodar a aplicação localmente. [baixar](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
+``` 
