@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja de Produtos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Loja de Produtos</h1>
+
+        <h3>Produtos Disponíveis</h3>
+        <div id="produtos" class="d-flex overflow-auto mb-4">
+            <div class="card me-3" style="width: 18rem;" v-for="produto in produtos" :key="produto.id">
+                <img :src="produto.imagem" class="card-img-top" alt="Imagem do produto">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ produto.nome }}</h5>
+                    <p class="card-text">R$ {{ produto.preco.toFixed(2) }}</p>
+                    <div class="mt-auto">
+                        <button class="btn btn-primary w-100" @click="adicionarAoCarrinho(produto)">Adicionar ao
+                            Carrinho</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>Carrinho</h2>
+        <div id="carrinho" class="mb-4">
+            <ul class="list-group">
+                <li class="list-group-item" v-for="(item, index) in carrinho" :key="index">
+                    <div class="d-flex justify-content-between">
+                        <span>{{ item.nome }} - R$ {{ item.preco.toFixed(2) }}</span>
+                        <button class="btn btn-danger btn-sm" @click="removerDoCarrinho(index)">Remover</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <button class="btn btn-success" @click="finalizarPedido">Finalizar Pedido</button>
+
+        <h2 class="mt-5">Consultar Pedidos</h2>
+
+        <div v-if="mostrarPedidos" id="pedidos" class="list-group">
+            <div v-for="(pedido, index) in pedidos" :key="index" class="list-group-item mb-3">
+                <h5>Pedido {{ index + 1 }}</h5>
+                <ul>
+                    <li v-for="item in pedido" :key="item.id">{{ item.nome }} - R$ {{ item.preco.toFixed(2) }}</li>
+                </ul>
+                <button class="btn btn-info btn-sm" @click="expandirPedido(index)">Ver Detalhes</button>
+                <div v-if="pedido.expandido">
+                    <ul>
+                        <li v-for="item in pedido" :key="item.id">
+                            {{ item.nome }} - R$ {{ item.preco.toFixed(2) }}<br>
+                            Quantidade: 1
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-info" @click="consultarPedidos">Consultar Pedidos</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>

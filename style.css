@@ -1,0 +1,29 @@
+.card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card-body .btn {
+    margin-top: auto;
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.btn-primary,
+.btn-danger,
+.btn-info,
+.btn-success {
+    border-radius: 25px;
+}
+
+.card-body .btn {
+    width: 100%;
+}
