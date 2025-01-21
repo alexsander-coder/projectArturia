@@ -22,15 +22,22 @@ Este é um projeto de uma **loja de produtos** simples, desenvolvida com **Vue.j
 
 ### Pré-requisitos
 
-- **Navegador web moderno** (com suporte ao IndexedDB).
-- **Editor de código** (como Visual Studio Code).
+- **Navegador web moderno** com suporte ao **IndexedDB** (como Google Chrome ou Firefox).
+- **Editor de código** (como [Visual Studio Code](https://code.visualstudio.com/)).
+- **Live Server** para rodar a aplicação localmente. Você pode instalar o Live Server através do Visual Studio Code [aqui](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
 
-### Passo 1: Baixar o Repositório
+### Passo 1: Clonar o repositorio
 
-Clone este repositório para o seu computador:
+Clonar repositorio:
 
 ```bash
-git clone https://github.com/alexsander-coder/projectArturia.git
+git clone https://github.com/alexsander-coder/projectArturia.git 
+```
 
 
+### Passo 2: Entrar na pasta do projeto
+cd projectArturia
 
+
+### Passo 3: Adicionar extensao live server, para subir a aplicacao
+- **Live Server** para rodar a aplicação localmente. [baixar](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
