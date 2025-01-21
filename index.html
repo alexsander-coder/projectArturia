@@ -11,22 +11,32 @@
 
 <body>
 
-    <div class="container mt-5">
+    <div class="container mt-5" style="transform: scale(0.8); margin-top: -70px !important;">
         <h1 class="text-center mb-4">Loja de Produtos</h1>
 
         <h3>Produtos Disponíveis</h3>
-        <div id="produtos" class="d-flex overflow-auto mb-4">
-            <div class="card me-3" style="width: 18rem;" v-for="produto in produtos" :key="produto.id">
-                <img :src="produto.imagem" class="card-img-top" alt="Imagem do produto">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">{{ produto.nome }}</h5>
-                    <p class="card-text">R$ {{ produto.preco.toFixed(2) }}</p>
-                    <div class="mt-auto">
-                        <button class="btn btn-primary w-100" @click="adicionarAoCarrinho(produto)">Adicionar ao
-                            Carrinho</button>
+        <div class="slider-container">
+            <div class="slider" :style="{ transform: 'translateX(' + slidePosition + 'px)' }">
+                <div class="card me-3" style="width: 18rem;" v-for="produto in produtos" :key="produto.codigo">
+                    <img :src="produto.imagem" class="card-img-top" alt="Imagem do produto">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ produto.nome }}</h5>
+                        <p class="text-muted" style="font-size: 0.8rem;">Código: {{ produto.codigo }}</p>
+                        <p class="card-text">R$ {{ produto.preco.toFixed(2) }}</p>
+
+                        <div class="mt-auto">
+                            <button class="btn btn-primary w-100" @click="adicionarAoCarrinho(produto)">Adicionar ao
+                                Carrinho</button>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Botões de navegação -->
+        <div class="d-flex justify-content-center mt-3 gap-4">
+            <button class="btn btn-secondary" @click="moverSlider(1)">Anterior</button>
+            <button class="btn btn-secondary" @click="moverSlider(-1)">Próximo</button>
         </div>
 
         <h2>Carrinho</h2>
@@ -44,21 +54,17 @@
 
         <h2 class="mt-5">Consultar Pedidos</h2>
 
-        <div v-if="mostrarPedidos" id="pedidos" class="list-group">
-            <div v-for="(pedido, index) in pedidos" :key="index" class="list-group-item mb-3">
-                <h5>Pedido {{ index + 1 }}</h5>
+        <div v-if="mostrarPedidos">
+            <div v-for="(pedido, index) in pedidos" :key="index">
+                <p v-if="pedido.expandido">
+                    Produtos:
                 <ul>
-                    <li v-for="item in pedido" :key="item.id">{{ item.nome }} - R$ {{ item.preco.toFixed(2) }}</li>
+                    <li v-for="(produto, idx) in pedido.produtos" :key="idx">
+                        {{ produto.nome }} - R$ {{ produto.preco.toFixed(2) }}
+                    </li>
                 </ul>
-                <button class="btn btn-info btn-sm" @click="expandirPedido(index)">Ver Detalhes</button>
-                <div v-if="pedido.expandido">
-                    <ul>
-                        <li v-for="item in pedido" :key="item.id">
-                            {{ item.nome }} - R$ {{ item.preco.toFixed(2) }}<br>
-                            Quantidade: 1
-                        </li>
-                    </ul>
-                </div>
+                Total: R$ {{ calcularTotalPedido(pedido).toFixed(2) }}
+                </p>
             </div>
         </div>
         <button class="btn btn-info" @click="consultarPedidos">Consultar Pedidos</button>
